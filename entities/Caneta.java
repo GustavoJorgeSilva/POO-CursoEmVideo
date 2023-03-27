@@ -9,6 +9,7 @@ public class Caneta {
     private boolean tampada;
 
     public Caneta() {
+        tampar();
     }
 
     public Caneta(String modelo, String cor, double ponta, int carga, boolean tampada) {
@@ -16,7 +17,7 @@ public class Caneta {
         this.cor = cor;
         this.ponta = ponta;
         this.carga = carga;
-        this.tampada = tampada;
+        this.tampada = true;
     }
 
     public String getModelo() {
@@ -100,4 +101,12 @@ public class Caneta {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Modelo: " + modelo + " " +
+                "Cor: " + cor + " " +
+                "Ponta: " + ponta + " " +
+                "Carga: " + carga + " " +
+                "Tampada: " + tampada;
+    }
 }
