@@ -1,23 +1,28 @@
 package com.cursoemvideo.cursopoocursoemvideo.entities;
 
-public class Conta {
+public abstract class Conta {
 
-    private int numeroConta;
+    public Integer numeroConta;
     private String titular;
-    private double saldo;
-    private double limiteDeCredito;
+    protected double saldo;
 
+    private boolean status;
 
-    public Conta(int numeroConta, String titular, double limiteDeCredito) {
-        if (saldo < 0){
+    protected String tipoConta;
+
+    public Conta() {
+    }
+
+    public Conta(int numeroConta, String titular, String tipoConta, Double saldo) {
+        if (saldo < 0) {
             throw new ContaException("Erro: saldo menor que 0");
         }
         this.numeroConta = numeroConta;
+        this.saldo = 0;
         this.titular = titular;
-        this.limiteDeCredito = limiteDeCredito;
+        this.status = false;
+        this.tipoConta = tipoConta;
     }
-
-
 
     public int getNumeroConta() {
         return numeroConta;
@@ -31,6 +36,17 @@ public class Conta {
         return saldo;
     }
 
+    public String getTipoConta() {
+        return tipoConta;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void setTipoConta(String tipoConta) {
+        this.tipoConta = tipoConta;
+    }
 
     public void setNumeroConta(int numeroConta) {
         this.numeroConta = numeroConta;
@@ -40,28 +56,88 @@ public class Conta {
         this.titular = titular;
     }
 
-    public double getLimiteDeCredito() {
-        return limiteDeCredito;
+
+    public boolean isStatus() {
+        return status;
     }
 
 
-    public void deposito(double valor) {
-        this.saldo += valor;
+    public void deposito(double valor, int numeroConta) {
+        if (!this.status) {
+            throw new ContaException("Erro: a conta está fechada e a operação nao pode ser realizada.");
+        } else {
+            if (numeroConta == this.numeroConta) {
+                System.out.println("Deposito na conta de " + getTitular() + " no valor de " + valor);
+                saldo += valor;
+            } else {
+                throw new ContaException("Conta não encontrada.");
+            }
+
+        }
     }
 
-    public void saque(double valor) {
-        validarSaque(valor);
-        this.saldo -= valor;
-
-    }
 
     public void validarSaque(double valor) {
-        if (valor > limiteDeCredito) {
-            throw new ContaException("Valor solicitado maior do que o disponivel para saque");
+        if (!this.status) {
+            throw new ContaException("Erro: a conta está fechada e a operação nao pode ser realizada.");
         }
-
         if (valor > saldo) {
-            throw new ContaException("Saldo menor do que o valor solicitado");
+            throw new ContaException("Saldo menor do que o valor solicitado.");
         }
     }
+
+    public void fecharConta(int numeroConta) {
+
+        if (numeroConta == this.numeroConta) {
+
+            if (this.saldo < 0) {
+                throw new ContaException("Erro: Para encerrar a conta necessário que o saldo nao seja devedor");
+            }
+            if (this.saldo > 0) {
+                throw new ContaException("Erro: para encerrar a conta é nessario que nao exista saldo");
+            } else {
+                System.out.println("Conta: " + getNumeroConta() + " fechada.");
+                this.status = false;
+            }
+
+        } else {
+            throw new ContaException("Conta não encontrada.");
+        }
+    }
+
+
+    public void abrirConta() {
+
+        if (!tipoConta.equals("cp") && !tipoConta.equals("cc")) {
+            throw new ContaException("Erro: tipo de conta inválido.");
+        }
+        if (tipoConta.equals("cc")) {
+            System.out.println("Conta aberta com sucesso!");
+            this.saldo = 50.00;
+            this.status = true;
+        }
+        if (tipoConta.equals("cp")) {
+            System.out.println("Conta aberta com sucesso!");
+            this.saldo = 150.00;
+            this.status = true;
+        }
+
+
+    }
+    public abstract void saque(double valor, int numeroConta);
+
+    public void statusAtual(int numeroConta){
+        if (numeroConta == this.numeroConta){
+            System.out.println("Tipo da conta: " + getTipoConta());
+            System.out.println("Conta: " + getNumeroConta());
+            System.out.println("Saldo: " + getSaldo());
+            System.out.println("Titular: " + getTitular());
+            System.out.println("Status: " + isStatus());
+        }
+        else {
+            throw new ContaException("Conta não encontrada.");
+        }
+    }
+
+
 }
