@@ -1,18 +1,20 @@
-package com.cursoemvideo.cursopoocursoemvideo.relacionamentoClasses.entities;
+package com.cursoemvideo.cursopoocursoemvideo.ultraEmojiCombat.entities;
 
-import com.cursoemvideo.cursopoocursoemvideo.relacionamentoClasses.exception.FightException;
+import com.cursoemvideo.cursopoocursoemvideo.ultraEmojiCombat.exception.FightException;
+
+import java.util.InputMismatchException;
 
 public class Lutador {
 
     private String nome;
     private String nacionalidade;
-    private Integer idade;
-    private Integer altura;
-    private Double peso;
+    private int idade;
+    private int altura;
+    private double peso;
     private String categoria;
-    private Integer vitorias;
-    private Integer derrotas;
-    private Integer empates;
+    private int vitorias;
+    private int derrotas;
+    private int empates;
 
     public Lutador() {
     }
@@ -20,15 +22,16 @@ public class Lutador {
     public Lutador(String nome, String nacionalidade, Integer idade, Integer altura, Double peso, Integer vitorias, Integer derrotas, Integer empates) {
 
 
-        this.nome = nome;
-        this.nacionalidade = nacionalidade;
-        this.idade = idade;
-        this.altura = altura;
+        setNome(nome);
+        setNacionalidade(nacionalidade);
+        setIdade(idade);
+        setAltura(altura);
         setPeso(peso);
-        this.vitorias = vitorias;
-        this.derrotas = derrotas;
-        this.empates = empates;
-        this.categoria = defininircategoria(peso);
+        setVitorias(vitorias);
+        setDerrotas(derrotas);
+        setEmpates(empates);
+        setCategoria(defininirCategoria());
+
     }
 
     public String getNome() {
@@ -75,7 +78,7 @@ public class Lutador {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    private void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
@@ -130,23 +133,23 @@ public class Lutador {
     }
 
     public void perderLuta() {
-        setDerrotas(getVitorias() + 1);
+        setDerrotas(getDerrotas() + 1);
     }
 
     public void empatarLuta() {
         setEmpates(getEmpates() + 1);
     }
 
-    private String defininircategoria(double peso) {
+    private String defininirCategoria() {
 
-        if (peso < 52.2 || peso > 120.2) {
+        if (this.peso < 52.2 || this.peso > 120.2) {
             throw new FightException("Peso inválido");
-        } else if (peso <= 70.3) {
-            categoria = "Leve";
-        } else if (peso <= 83.9) {
-            categoria = "Médio";
-        } else if (peso <= 120.2) {
-            categoria = "Pesado";
+        } else if (this.peso <= 70.3) {
+            this.categoria = "Leve";
+        } else if (this.peso <= 83.9) {
+            this.categoria = "Médio";
+        } else if (this.peso <= 120.2) {
+            this.categoria = "Pesado";
         }
         return categoria;
     }

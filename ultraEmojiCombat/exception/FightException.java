@@ -1,4 +1,4 @@
-package com.cursoemvideo.cursopoocursoemvideo.relacionamentoClasses.exception;
+package com.cursoemvideo.cursopoocursoemvideo.ultraEmojiCombat.exception;
 
 public class FightException extends RuntimeException{
 
