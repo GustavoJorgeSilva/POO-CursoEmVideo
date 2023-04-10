@@ -1,21 +1,26 @@
 package com.cursoemvideo.cursopoocursoemvideo.entities;
 
-public class Pessoa {
+public abstract class Pessoa {
 
     // AULA 09
 
-    private String nome;
-    private int idade;
-    private String sexo;
+    protected String nome;
+    protected int idade;
+    protected String sexo;
 
-    // METODOS ESPECIAIS
+    // CONSTRUTOR
 
+
+    public Pessoa() {
+    }
 
     public Pessoa(String nome, int idade, String sexo) {
         this.nome = nome;
         this.idade = idade;
         this.sexo = sexo;
     }
+
+    // METODOS ESPECIAIS
 
     public String getNome() {
         return nome;
@@ -41,9 +46,18 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", idade=" + idade +
+                ", sexo='" + sexo + '\'' +
+                '}';
+    }
+
     // METODOS
 
-    public void fazerAniversario(int idade){
+    public final void fazerAniversario(){
             setIdade(getIdade() + 1);
     }
 }

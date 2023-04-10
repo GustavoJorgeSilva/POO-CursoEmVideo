@@ -1,13 +1,14 @@
 package com.cursoemvideo.cursopoocursoemvideo;
 
+import com.cursoemvideo.cursopoocursoemvideo.entities.Aluno;
 import com.cursoemvideo.cursopoocursoemvideo.entities.Livro;
 import com.cursoemvideo.cursopoocursoemvideo.entities.Pessoa;
 
 public class Aula09 {
     public static void main(String[] args) {
 
-        Pessoa p1 = new Pessoa("Gustavo",28,"Masculino");
-        Livro l1 = new Livro("A menina que odiava livros","Paulo Coelho",68,p1);
+        Aluno aluno = new Aluno("gustavo",28,"Masc",100,"ADS");
+        Livro l1 = new Livro("A menina que odiava livros","Paulo Coelho",68,aluno);
 
         l1.abrir();
         l1.avancarpag();
@@ -21,9 +22,7 @@ public class Aula09 {
         System.out.println(l1.getPagAtual());
         l1.detalhes();
 
-        System.out.println(p1.getIdade());
-        p1.fazerAniversario(28);
-        System.out.println(p1.getIdade());
+
 
 
 
