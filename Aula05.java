@@ -1,8 +1,7 @@
 package com.cursoemvideo.cursopoocursoemvideo;
 
-import com.cursoemvideo.cursopoocursoemvideo.entities.Conta;
 import com.cursoemvideo.cursopoocursoemvideo.entities.ContaCorrente;
-import com.cursoemvideo.cursopoocursoemvideo.entities.ContaException;
+import com.cursoemvideo.cursopoocursoemvideo.entities.exceptions.ContaException;
 import com.cursoemvideo.cursopoocursoemvideo.entities.ContaPoupanca;
 
 public class Aula05 {

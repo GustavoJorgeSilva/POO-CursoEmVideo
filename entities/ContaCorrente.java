@@ -1,5 +1,7 @@
 package com.cursoemvideo.cursopoocursoemvideo.entities;
 
+import com.cursoemvideo.cursopoocursoemvideo.entities.exceptions.ContaException;
+
 public class ContaCorrente extends Conta {
 
     private double mensalidade;

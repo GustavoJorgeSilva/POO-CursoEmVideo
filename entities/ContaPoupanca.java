@@ -1,5 +1,7 @@
 package com.cursoemvideo.cursopoocursoemvideo.entities;
 
+import com.cursoemvideo.cursopoocursoemvideo.entities.exceptions.ContaException;
+
 public class ContaPoupanca extends Conta {
 
     private double rendimento;
